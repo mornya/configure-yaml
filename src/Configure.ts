@@ -13,7 +13,10 @@ let configure: any;
  * @param phase {string | undefined}
  * @returns {T}
  */
-export function load<T>(filepath: string | undefined = './application.config.yml', phase?: string): T {
+export function load<T = Record<string, any>>(
+  filepath: string | undefined = './application.config.yml',
+  phase?: string,
+): T {
   if (!configure) {
     if (filepath && Files.isExist(filepath)) {
       const originEnvConfig: Record<string, Partial<T>> = yaml.parse(Files.read(filepath));
@@ -29,6 +32,35 @@ export function load<T>(filepath: string | undefined = './application.config.yml
     }
   }
 
+  return configure;
+}
+
+/**
+ * append
+ *
+ * @template T
+ * @param value {Partial<T>}
+ * @returns {T}
+ */
+export function append<T = Record<string, any>>(value: Partial<T>): T {
+  if (configure && value) {
+    configure = deepmerge<Partial<T>>(configure, value);
+  }
+  return configure;
+}
+
+/**
+ * remove
+ *
+ * @template T
+ * @param key {string}
+ * @returns {T}
+ */
+export function remove<T = Record<string, any>>(key: string): T {
+  if (configure && key) {
+    /* eslint-disable-next-line no-eval */
+    eval(`delete configure.${key}`);
+  }
   return configure;
 }
 

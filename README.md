@@ -40,19 +40,51 @@ production:
   name: 환경설정러
 ```
 위와 같은 내용으로 configure.yml 파일에 저장이 되어 있을 경우, 메소드 파라미터에 따라 로드하는 항목을 결정한다.
-```
+```typescript
 import { Configure } from 'configure-yaml';
 
 // "common" 항목만 로드
 Configure.load('configure.yml');
 
-// "common" 및 "local" 항목 로드 (id 값은 local 항목 값으로 오버라이드 됨)
+// "common" 및 "production" 항목 로드 (id 값은 "production" 항목 값으로 오버라이드 됨)
 Configure.load('configure.yml', 'production');
+```
+
+#### `Configure.append`
+메모리로 읽어 온 설정에 항목을 추가한다.
+```typescript
+import { Configure } from 'configure-yaml';
+
+/*
+ * {
+ *   value: '000',
+ * }
+ */
+const result = Configure.append({ value1: 'AAA', value2: 'BBB' });
+console.log(result); // { value: '000', value1: 'AAA', value2: 'BBB' }
+```
+
+#### `Configure.remove`
+메모리로 읽어 온 설정 항목 일부를 제거한다.
+```typescript
+import { Configure } from 'configure-yaml';
+
+/*
+ * {
+ *   value1: 'AAA',
+ *   value2: {
+ *     value2_1: '1',
+ *     value2_2: '2',
+ *   }
+ * }
+ */
+Configure.remove('value1'); // removes value1
+Configure.remove('value2.value2_2'); // removes value2_2 in value2
 ```
 
 #### `Configure.unload`
 메모리에서 제거.
-```
+```typescript
 import { Configure } from 'configure-yaml';
 
 Configure.unload();
