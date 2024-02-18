@@ -50,46 +50,6 @@ Configure.load('configure.yml');
 Configure.load('configure.yml', 'production');
 ```
 
-#### `Configure.append`
-메모리로 읽어 온 설정에 항목을 추가한다.
-```typescript
-import { Configure } from 'configure-yaml';
-
-/*
- * {
- *   value: '000',
- * }
- */
-const result = Configure.append({ value1: 'AAA', value2: 'BBB' });
-console.log(result); // { value: '000', value1: 'AAA', value2: 'BBB' }
-```
-
-#### `Configure.remove`
-메모리로 읽어 온 설정 항목 일부를 제거한다.
-```typescript
-import { Configure } from 'configure-yaml';
-
-/*
- * {
- *   value1: 'AAA',
- *   value2: {
- *     value2_1: '1',
- *     value2_2: '2',
- *   }
- * }
- */
-Configure.remove('value1'); // removes value1
-Configure.remove('value2.value2_2'); // removes value2_2 in value2
-```
-
-#### `Configure.unload`
-메모리에서 제거.
-```typescript
-import { Configure } from 'configure-yaml';
-
-Configure.unload();
-```
-
 ## Change Log
 프로젝트 변경사항은 [CHANGELOG.md](CHANGELOG.md) 파일 참조.
 
