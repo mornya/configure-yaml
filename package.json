@@ -12,12 +12,16 @@
     "back-end"
   ],
   "homepage": "https://github.com/mornya/configure-yaml",
+  "bugs": "https://github.com/mornya/configure-yaml/issues",
   "license": "MIT",
   "author": "mornya <mornya78@gmail.com>",
   "private": false,
-  "repository": "https://github.com/mornya/configure-yaml",
-  "bugs": "https://github.com/mornya/configure-yaml/issues",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mornya/configure-yaml.git"
+  },
   "main": "./dist/index.js",
+  "module": "./esm/index.js",
   "types": "./dist",
   "scripts": {
     "setup": "husky && lintest install || exit 0",
