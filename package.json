@@ -1,6 +1,6 @@
 {
   "name": "configure-yaml",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The integrated configuration loader using YAML.",
   "keywords": [
     "app",
@@ -20,11 +20,12 @@
   "main": "./dist/index.js",
   "types": "./dist",
   "scripts": {
-    "setup": "husky install && lintest install || exit 0",
-    "prepublishOnly": "vessel prepublish",
+    "setup": "husky && lintest install || exit 0",
+    "prepublishOnly": "vessel prepublish && vessel build",
     "login": "vessel login",
     "clean": "vessel clean",
     "build": "vessel build",
+    "build:esm": "vessel build --esm",
     "watch": "vessel build --watch",
     "format": "prettier --write --ignore-path .prettierignore ./src ./types",
     "check": "vessel check",
@@ -47,6 +48,12 @@
     "!dist/**/@setup.js",
     "!dist/**/*.test.d.ts",
     "!dist/**/*.test.js",
+    "esm",
+    "!esm/test",
+    "!esm/**/@setup.d.ts",
+    "!esm/**/@setup.js",
+    "!esm/**/*.test.d.ts",
+    "!esm/**/*.test.js",
     "CHANGELOG.md",
     "LICENSE",
     "README.md"
@@ -63,15 +70,15 @@
   "devDependencies": {
     "@lintest/core": "^1.16.0",
     "@types/jest": "^29.5.12",
-    "@types/node": "^20.11.19",
-    "@types/react": "^18.2.56",
-    "@types/react-dom": "^18.2.19",
+    "@types/node": "^20.12.7",
+    "@types/react": "^18.2.79",
+    "@types/react-dom": "^18.2.25",
     "@types/webpack-env": "^1.18.4",
-    "eslint": "^8.56.0",
+    "eslint": "^8.57.0",
     "husky": "^9.0.11",
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
-    "typescript": "^5.3.3"
+    "typescript": "^5.4.5"
   },
   "lint-staged": {
     "*.{css,scss}": [

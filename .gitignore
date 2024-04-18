@@ -5,8 +5,9 @@
 # Local only
 /coverage
 /bin
-/dist
 /build
+/dist
+/esm
 /node_modules
 /out
 /temp
