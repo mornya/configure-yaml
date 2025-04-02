@@ -1,34 +1,15 @@
 {
   "compilerOptions": {
     "module": "CommonJS",
-    "moduleResolution": "Node",
     "target": "ES5",
-    "typeRoots": [
-      "./node_modules/@types",
-      "./public/types",
-      "./types"
-    ],
-    "types": [
-      "jest",
-      "node",
-      "react",
-      "react-dom",
-      "webpack-env"
-    ],
-    "lib": [
-      "esnext",
-      "esnext.asynciterable",
-      "dom",
-      "dom.iterable",
-      "scripthost"
-    ],
+    "moduleResolution": "Node",
+    "moduleDetection": "force",
+    "typeRoots": ["./node_modules/@types", "./public/types", "./types"],
+    "types": ["jest", "node", "react", "react-dom"],
+    "lib": ["esnext", "esnext.asynciterable", "dom", "dom.iterable", "scripthost"],
     "paths": {
-      "@/*": [
-        "./src/*"
-      ],
-      "~/*": [
-        "./*"
-      ]
+      "@/*": ["./src/*"],
+      "~/*": ["./*"]
     },
     "baseUrl": ".",
     "outDir": "./dist/",
@@ -50,17 +31,6 @@
     "forceConsistentCasingInFileNames": true,
     "verbatimModuleSyntax": false
   },
-  "include": [
-    "public/**/*.d.ts",
-    "types/**/*",
-    "src/**/*"
-  ],
-  "exclude": [
-    ".idea",
-    ".scannerwork",
-    ".vscode",
-    "coverage",
-    "dist",
-    "src/assets"
-  ]
+  "include": ["public/**/*.d.ts", "types/**/*", "src/**/*"],
+  "exclude": ["coverage", "dist", "src/assets"]
 }

@@ -1,4 +1,4 @@
-import { Files } from '@mornya/cli-libs';
+import fs from 'node:fs';
 import * as Configure from '../Configure';
 
 const yamlConfig1 = `
@@ -13,9 +13,7 @@ local:
 `;
 
 describe('Configure module', () => {
-  afterEach(() => {
-    Files.rimraf('temp.yml');
-  });
+  afterEach(() => fs.existsSync('temp.yml') && fs.unlinkSync('temp.yml'));
 
   it('Configure.load (no parameter)', () => {
     let error;
@@ -28,24 +26,17 @@ describe('Configure module', () => {
   });
 
   it('Configure.load (config #1)', () => {
-    Files.write('temp.yml', yamlConfig1);
-    expect(Configure.load('temp.yml')).toStrictEqual({
-      value1: 'AAA',
-    });
+    fs.writeFileSync('temp.yml', yamlConfig1);
+    expect(Configure.load('temp.yml')).toStrictEqual({ value1: 'AAA' });
   });
 
   it('Configure.load (config #2, no phase)', () => {
-    Files.write('temp.yml', yamlConfig2);
-    expect(Configure.load('temp.yml')).toStrictEqual({
-      value1: 'AAA',
-    });
+    fs.writeFileSync('temp.yml', yamlConfig2);
+    expect(Configure.load('temp.yml')).toStrictEqual({ value1: 'AAA' });
   });
 
   it('Configure.load (config #2, local phase)', () => {
-    Files.write('temp.yml', yamlConfig2);
-    expect(Configure.load('temp.yml', 'local')).toStrictEqual({
-      value1: 'AAA',
-      value2: 'BBB',
-    });
+    fs.writeFileSync('temp.yml', yamlConfig2);
+    expect(Configure.load('temp.yml', 'local')).toStrictEqual({ value1: 'AAA', value2: 'BBB' });
   });
 });
